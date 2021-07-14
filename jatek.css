@@ -1,0 +1,51 @@
+
+@font-face { font-family: Festive; src: url('Festive-Regular.ttf'); } 
+.fojatekDiv{
+    background-image: url("pattern-3371709_1920.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.főcím{
+    font-family: Festive;
+    text-align: center;
+}
+.doboz{
+    height: 150px;
+    border: 4px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow:10px 3px 100px black;
+}
+.soha{
+    pointer-events: none;
+}
+.gone{
+    display:hide;
+}
+.kartya{
+    width: 70%;
+    padding: 10px;
+    background-image: url("white-4298475_1280a.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.kartyalap{
+    background-image: url("kartyahatoldal.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.gomb{
+    margin-bottom: 10px;
+    background-color: black;
+    border: black;
+}
+.gomb:hover{
+    background-color: white;
+    color:black;
+    box-shadow: 2px 2px 5px black;
+}
+.eredmeny{
+    display: none;
+}

@@ -11,7 +11,18 @@ let pontSZAM = parseInt(pontszam.innerHTML)
 let vegeredmeny =document.querySelector('.eredmeny')
 let ertek1;
 let ertek2;
+let lezaras = false;
 
+/////////////// FUNKCIÓ HOGY NE LEHESSEN KETTŐNÉL TÖBBET KATTINTANI
+function noMoreClick(){
+    kattintas++;
+    tömbErtek.push(this);
+    if (kattintas > 2) {
+        lezaras=true; 
+    }else{
+        lezaras = false;
+    }
+}
 /////////////// KEVERÉS FUNKCIÓ (egy array-t kever meg ahol a színek vannak)
  let keveres =function(a){
     for (let i =0; i<szinek.length;i++) {
@@ -24,17 +35,17 @@ let ertek2;
 
 //////////// FŐ FUNKCIÓ (kattintás számláló, ne lehessen kétszer kattintani a kártyát, plusz funkciók)
 const lepes = function(){
+    ellenorzes();
+    meres();
+    if(lezaras) return;
     document.querySelector('#katt').innerText++;
     this.classList.add('soha');
-    tömbErtek.push(this);
-    kattintas++;
     sumKattintas++;
-    ellenorzes();
-    meres()
   };
 
 ////// SZÍN KIOSZTÁS (játék elején kap minden kártya egy színt, ami nem változik az új játékig)
   let szinKiosztas=function(){
+      if(lezaras) return;
       this.classList.remove('kartyalap');
     var value = this.getAttribute('value');
       this.style.backgroundColor=szinek[value];
@@ -42,6 +53,7 @@ const lepes = function(){
 
 ///////// ElTŰNÉS FUNKCIÓ (ez a funkció felel a kártyák eltűnéséért)  
 function eltunes(x,y){
+    if(lezaras) return;
     setTimeout(function(){
         pontszam.innerHTML=parseInt(pontszam.innerHTML)+1;
         pontSZAM++;
@@ -57,9 +69,11 @@ function meres(){
             dobozOK[i].classList.add('kartyalap')
             dobozOK[i].classList.remove('soha');
             tömbErtek =[];
+            kattintas=0;
+            lezaras = false;
         }
     },500)
-        kattintas=0;
+    
     }
 };
 //////////// ELLENŐRZÉS FUNKCIÓ (Ez a funkció figyeli, hogy azonos színűek e  kártyák)
@@ -76,6 +90,7 @@ function ellenorzes(){
 }
 //////////// EVENT LISTENEREK (Két funkció fut le minden kattintásnál)
 for(let u = 0; u<dobozOK.length;u++){
+    dobozOK[u].addEventListener("click",noMoreClick)
     dobozOK[u].addEventListener("click",szinKiosztas)
     dobozOK[u].addEventListener("click",lepes)
   };
